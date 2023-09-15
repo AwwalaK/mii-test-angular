@@ -1,0 +1,69 @@
+<div>
+
+  <div class="header">
+    <h1>TODOS</h1>
+    <button (click)="buatData()">Create</button>
+  </div>
+
+  <div class="form" *ngIf="createMode || editMode" [formGroup]="createMode ? createForm : editForm">
+    <h2>{{ createMode ? 'Create New' : 'Edit Data' }}</h2>
+  
+    <div class="input-form">
+      <label for="UserId">UserId</label>
+
+      <div class="input-data">
+        <input type="number" id="UserId" name="UserId" formControlName="userId" required [class.error]="submitted.userId && (!createForm.get('userId')?.value || !editForm.get('userId')?.value)">
+      
+        <div class="error-container" *ngIf="submitted.userId && (!createForm.get('userId')?.value || !editForm.get('userId')?.value)">
+          <div class="error-message">User ID is required</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-form">
+      <label for="title">Title</label>
+
+      <div class="input-data">
+        <input type="text" id="title" name="title" formControlName="title" required [class.error]="submitted.title && (!createForm.get('title')?.value || !editForm.get('title')?.value)">  
+      
+        <div class="error-container" *ngIf="submitted.title && (!createForm.get('title')?.value || !editForm.get('title')?.value) ">
+          <div class="error-message">Title is required</div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="input-form">
+      <label for="completed">Completed</label>
+      <input type="checkbox" id="completed" name="completed" formControlName="completed">
+    </div>
+  
+    <button (click)="createMode ? createData() : updateData()">
+      {{ createMode ? 'Create' : 'Save' }}
+    </button>
+    <button (click)="createMode ? cancelCreate() : cancelEdit()">Cancel</button>
+  </div> 
+
+  <table>
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Completed</th>
+        <th>Setting</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data">
+        <td>{{ item.userId }}</td>
+        <td>{{ item.id }}</td>
+        <td>{{ item.title }}</td>
+        <td>{{ item.completed ? 'Yes' : 'No' }}</td>
+        <td>
+          <button (click)="editData(item)">Update</button>
+          <button (click)="deleteData(item.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

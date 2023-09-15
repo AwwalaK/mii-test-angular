@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-container {
+  display: flex;
+  flex-grow: 1;
+}
+
+app-header,
+app-sidebar,
+app-footer {
+  padding: 10px;
+}
+
+app-header {
+  text-align: center;
+}
+
+app-sidebar {
+  width: 200px;
+  min-width: 200px;
+}
+
+main {
+  flex-grow: 1;
+  overflow: auto;
+  padding: 60px 20px;
+}
+
+app-footer {
+  text-align: center;
+  font-size: 16px;
+}
+  
